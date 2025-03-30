@@ -1,10 +1,10 @@
 import { auth, signIn, signOut } from "@/auth"
+import Form from "next/form";
 import Link from "next/link";
 import { RxAvatar } from "react-icons/rx";
 
 const Navbar = async() => {
     const session=await auth();
-    console.log(session)
   return (
     <header>
         <nav className="bg-slate-600 px-5 py-4 flex justify-between items-center">
@@ -23,15 +23,15 @@ const Navbar = async() => {
                                 </Link>
                             </div>
                             <div>
-                                <form action={async()=>{
-                                        "use server"
+                                <Form action={async()=>{
+                                       "use server"
                                         await signOut()
                                     }}>
                                         <button
                                         type="submit"
                                         className="cursor-pointer"
                                         >Logout</button>
-                                </form>
+                                </Form>
 
                             </div>
                             <div>
