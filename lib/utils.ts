@@ -13,3 +13,11 @@ export function formateDate(date:string){
   });
 
 }
+
+export function formateViews(views:number){
+  let result:string="Views"
+  if(views<2){
+    result="View"
+  }
+  return result
+}

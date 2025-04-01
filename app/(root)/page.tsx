@@ -1,32 +1,14 @@
 import SearchBar from "@/components/SearchBar";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { STARTUP_QUERY } from "@/sanity/lib/queries";
 import Image from "next/image";
 
 
 export default async function Home({searchParams}:{searchParams:Promise<{query?:string}>}) {
   const query = (await searchParams).query
-  const posts=[{
-    _createdAt:new Date(),
-    author:{name:"mayank",_id:1,image:"https://avatars.githubusercontent.com/u/161747646?v=4"},
-    views:5,
-    _id:1,
-    description:"this is a startup",
-    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlTH0O23WPs5bvs2cLnMwJnwSbRAl2sTc5wg&s",
-    category:"Robots",
-    title:"We Robots"
-
-  },
-  {
-    _createdAt:new Date(),
-    author:{name:"mayank",_id:1},
-    views:5,
-    _id:2,
-    description:"this is a startup",
-    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlTH0O23WPs5bvs2cLnMwJnwSbRAl2sTc5wg&s",
-    category:"Robots",
-    title:"We Robots"
-
-  }]
+  const params={search:query || null}
+  const {data:posts}=await sanityFetch({query:STARTUP_QUERY, params})
   return (
     <>
       <section className="pink_container">
@@ -51,6 +33,7 @@ export default async function Home({searchParams}:{searchParams:Promise<{query?:
           }
         </ul>
       </section>
+      <SanityLive/>
     </>
   );
 }
